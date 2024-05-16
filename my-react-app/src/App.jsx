@@ -1,31 +1,30 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import TodoInput from "./TodoInput.jsx";
+import TodoList from "./TodoList.jsx";
+import './App.css';
 
-function App(){
-  const [toDo,setTodo] = useState("");
-  const [toDos,setTodos] = useState([]);
-  const onChange = (e) => {
-      setTodo(e.target.value)
-  }
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if(toDo === ""){
-        return
-    }
-    setTodos((currentArray) =>[toDo, ...currentArray])
-    setTodo("")
-} 
-console.log(toDos) 
-return (
-  <div>
-      <h1>투두리스트를 만들어보자~</h1>
-      <form onSubmit={onSubmit}>
-          <input type="text" placeholder="입력하세요"  onChange={onChange} value={toDo}/>
-          <button>등록하기</button>
-      </form>
-      <ul>
-{toDos.map((item,index)=><li key={index}>{item}</li>)}
-      </ul>
-  </div>
-  )
+function App() {
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = (title, content) => {
+    const newTodo = { id: Date.now(), title, content, isDone: false };
+    setTodos([...todos, newTodo]);
+  };
+
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
+  const toggleIsDone = (id) => {
+    setTodos(todos.map(todo => todo.id === id ? { ...todo, isDone: !todo.isDone } : todo));
+  };
+
+  return (
+    <div className="App">
+      <TodoInput addTodo={addTodo} />
+      <TodoList todos={todos} deleteTodo={deleteTodo} toggleIsDone={toggleIsDone} />
+    </div>
+  );
 }
+
 export default App;
