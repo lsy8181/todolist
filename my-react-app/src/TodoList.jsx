@@ -9,7 +9,7 @@ function TodoList({ todos, deleteTodo, toggleIsDone }) {
     <>
       {/* 진행중인 할 일 컨테이너 */}
       <div className="todoListContainer ongoingContainer">
-        <h2>진행중📌</h2>
+        <h3>진행중📌</h3>
         {ongoingTodos.map(todo => (
           <TodoItem
             key={todo.id}
@@ -22,7 +22,7 @@ function TodoList({ todos, deleteTodo, toggleIsDone }) {
       
       {/* 완료된 할 일 컨테이너 */}
       <div className="todoListContainer completedContainer">
-        <h2>완료🎉</h2>
+        <h3>완료🎉</h3>
         {completedTodos.map(todo => (
           <TodoItem
             key={todo.id}
