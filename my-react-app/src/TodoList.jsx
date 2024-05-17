@@ -1,5 +1,5 @@
 import React from 'react';
-import TodoItem from './TodoItem';
+import TodoContainer from './TodoContainer.jsx';
 
 function TodoList({ todos, deleteTodo, toggleIsDone }) {
   const ongoingTodos = todos.filter(todo => !todo.isDone);
@@ -8,30 +8,20 @@ function TodoList({ todos, deleteTodo, toggleIsDone }) {
   return (
     <>
       {/* 진행중인 할 일 컨테이너 */}
-      <div className="todoListContainer ongoingContainer">
-        <h3>진행중📌</h3>
-        {ongoingTodos.map(todo => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            deleteTodo={deleteTodo}
-            toggleIsDone={toggleIsDone}
-          />
-        ))}
-      </div>
+      <TodoContainer 
+        title="진행중📌"
+        todos={ongoingTodos}
+        deleteTodo={deleteTodo}
+        toggleIsDone={toggleIsDone}
+      />
       
       {/* 완료된 할 일 컨테이너 */}
-      <div className="todoListContainer completedContainer">
-        <h3>완료🎉</h3>
-        {completedTodos.map(todo => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            deleteTodo={deleteTodo}
-            toggleIsDone={toggleIsDone}
-          />
-        ))}
-      </div>
+      <TodoContainer 
+        title="완료🎉"
+        todos={completedTodos}
+        deleteTodo={deleteTodo}
+        toggleIsDone={toggleIsDone}
+      />
     </>
   );
 }
